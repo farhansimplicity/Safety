@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Machine Safety Checklist</title>
+<style>
+:root{--navy:#17324d;--blue:#1769aa;--pale:#edf4fa;--ink:#203449;--muted:#6b7d8e;--line:#dfe7ee;--bg:#f4f7fa;--green:#197957;--red:#b42332;--amber:#9a650e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Arial,Helvetica,sans-serif}
+button,input,select,textarea{font:inherit}.app{min-height:100vh}.header{background:var(--navy);color:#fff;padding:17px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}.header h1{font-size:18px;margin:0}.header small{display:block;color:#c5d4e0;margin-top:3px}.header-actions{display:flex;gap:8px;align-items:center}.main{max-width:1440px;margin:auto;padding:22px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}.login-wrap{min-height:calc(100vh - 68px);display:grid;place-items:center;padding:20px}.login{width:min(420px,100%);padding:28px}.login h2{margin:0 0 5px}.muted{color:var(--muted)}.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}.field label{font-size:12px;font-weight:700;color:#53687a}.field input,.field select,.field textarea{border:1px solid #d5e0e8;border-radius:7px;padding:10px;background:#fff;color:var(--ink);min-width:0}.btn{border:1px solid #d5e0e8;border-radius:7px;background:#fff;color:#40576b;padding:9px 13px;font-size:12px;font-weight:700;cursor:pointer}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.danger{background:#fff1f2;border-color:#f3c5ca;color:var(--red)}.btn:disabled{opacity:.45;cursor:not-allowed}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}.tab{border:1px solid var(--line);background:#fff;border-radius:20px;padding:8px 13px;cursor:pointer;font-size:12px}.tab.active{background:var(--navy);border-color:var(--navy);color:#fff}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.stat{border:1px solid var(--line);border-radius:10px;background:#fff;padding:15px}.stat small{display:block;color:var(--muted)}.stat strong{display:block;font-size:25px;margin-top:5px}.machine-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.machine{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fff}.machine-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.machine h3{font-size:14px;margin:0}.status{font-size:10px;font-weight:700;padding:5px 8px;border-radius:20px}.status.green{background:#e5f6ee;color:var(--green)}.status.red{background:#fff0f1;color:var(--red)}.status.grey{background:#edf1f5;color:#617487}.machine p{font-size:11px;color:var(--muted);margin:10px 0}.progress{height:7px;background:#edf1f5;border-radius:10px;overflow:hidden}.progress span{display:block;height:100%;background:var(--green)}.toolbar{display:flex;align-items:end;gap:12px;flex-wrap:wrap;justify-content:space-between}.toolbar-left{display:flex;gap:10px;align-items:end;flex-wrap:wrap}.toolbar .field{margin:0}.check-row{display:grid;grid-template-columns:minmax(220px,1.4fr) minmax(180px,1fr) minmax(150px,.8fr);gap:12px;align-items:center;border-bottom:1px solid #edf1f5;padding:13px 0}.check-row:last-child{border-bottom:0}.check-name{font-weight:700;font-size:13px}.check-desc{font-size:11px;color:var(--muted);margin-top:3px}.check-row input,.check-row select,.check-row textarea{width:100%;border:1px solid #d5e0e8;border-radius:6px;padding:9px;background:#fff}.check-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--green)}.yesno{display:flex;align-items:center;gap:8px}.tag{font-size:10px;color:#63788b}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}.table th{background:#f7f9fb;color:#5d7184}.notice{padding:11px 13px;border-radius:8px;background:#fff8e9;border:1px solid #f0e1be;color:#735b2b;font-size:12px;margin:12px 0}.hidden{display:none!important}.empty{padding:28px;text-align:center;color:var(--muted)}.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.small{font-size:11px}.param-row{display:grid;grid-template-columns:1.3fr 1.5fr .8fr auto;gap:8px;align-items:center;margin:8px 0}.param-row input,.param-row select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px}.user-pill{font-size:11px;color:#dce8f1}.footer-note{font-size:11px;color:var(--muted);margin-top:18px}
+@media(max-width:850px){.main{padding:13px}.machine-grid,.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.check-row{grid-template-columns:1fr 1fr}.check-row>div:last-child{grid-column:1/-1}.header{padding:14px}}
+@media(max-width:520px){.machine-grid,.grid{grid-template-columns:1fr}.check-row{grid-template-columns:1fr}.check-row>div:last-child{grid-column:auto}.param-row{grid-template-columns:1fr 1fr}.header{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div><h1>Daily Machine Safety Checklist</h1><small>Operations · Machine safety monitoring</small></div>
+  <div class="header-actions"><span id="userLabel" class="user-pill"></span><button id="logoutBtn" class="btn hidden">Sign out</button></div>
+</header>
+<section id="loginScreen" class="login-wrap">
+  <div class="panel login">
+    <h2>Sign in</h2><div class="muted small">Choose your access role to continue.</div>
+    <div class="field"><label for="role">Login type</label><select id="role"><option value="operator">Operator</option><option value="admin">Administrator</option></select></div>
+    <div class="field"><label for="username">User ID</label><input id="username" autocomplete="username" placeholder="Enter user ID"></div>
+    <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Enter password"></div>
+    <button id="loginBtn" class="btn primary" style="width:100%">Sign in (local prototype)</button>
+    <div class="notice"><b>Local prototype access:</b> Administrator: <code>admin / admin123</code><br>Operator: <code>operator / operator123</code></div>
+    <div style="border-top:1px solid var(--line);margin:18px 0"></div>
+    <h3 style="margin:0 0 5px;font-size:14px">Supabase cloud connection</h3>
+    <div class="muted small">Enter your Supabase project URL and anon/public key. These settings are saved in this browser.</div>
+    <div class="field"><label for="supabaseUrl">Supabase Project URL</label><input id="supabaseUrl" type="url" placeholder="https://your-project.supabase.co" autocomplete="url"></div>
+    <div class="field"><label for="supabaseKey">Supabase anon / publishable key</label><input id="supabaseKey" type="password" placeholder="Paste anon/public key" autocomplete="off"></div>
+    <div class="actions" style="margin-top:4px"><button id="saveSupabase" class="btn">Save connection settings</button><span id="supabaseConfigStatus" class="small muted"></span></div>
+    <div class="field"><label for="cloudEmail">Cloud account email</label><input id="cloudEmail" type="email" placeholder="name@company.com" autocomplete="username"></div>
+    <div class="field"><label for="cloudPassword">Cloud account password</label><input id="cloudPassword" type="password" placeholder="Supabase Auth password" autocomplete="current-password"></div>
+    <button id="cloudLoginBtn" class="btn primary" style="width:100%">Sign in with Supabase</button>
+    <div id="loginMessage" class="notice hidden"></div>
+    <div class="small muted" style="margin-top:10px">Use only the anon/public key in this browser. Never paste a Supabase service_role or secret key here.</div>
+  </div>
+</section>
+<main id="mainScreen" class="main hidden">
+  <nav class="tabs" id="navTabs">
+    <button class="tab active" data-tab="dashboard">Dashboard</button>
+    <button class="tab" data-tab="checklist">Daily checklist</button>
+    <button class="tab admin-only" data-tab="setup">Checklist setup</button>
+    <button class="tab" data-tab="history">Records</button>
+  </nav>
+  <section id="dashboardView">
+    <div class="toolbar"><div><h2 style="margin:0 0 4px">Daily safety status</h2><div class="muted small">Green = all configured checks completed. Red = one or more checks missing.</div></div><div class="toolbar-left"><div class="field"><label for="dashboardDate">Dashboard date</label><input type="date" id="dashboardDate"></div><button class="btn" id="refreshDashboard">Refresh</button></div></div>
+    <div class="grid" style="margin:15px 0"><div class="stat"><small>Machines fully completed</small><strong id="completeCount">0 / 6</strong></div><div class="stat"><small>Machines requiring attention</small><strong id="pendingCount">6</strong></div><div class="stat"><small>Checklist parameters today</small><strong id="totalChecks">60</strong></div></div>
+    <div id="machineCards" class="machine-grid"></div>
+  </section>
+  <section id="checklistView" class="hidden">
+    <div class="toolbar"><div><h2 style="margin:0 0 4px">Operator checklist</h2><div class="muted small">Complete all required safety checks for the selected machine and date.</div></div></div>
+    <div class="panel">
+      <div class="toolbar"><div class="toolbar-left">
+        <div class="field"><label for="machineSelect">Machine</label><select id="machineSelect"></select></div>
+        <div class="field"><label for="checkDate">Checklist date</label><input type="date" id="checkDate"></div>
+      </div><div id="dateState" class="small muted"></div></div>
+      <div id="checklistRows"></div>
+      <div class="actions"><button id="saveChecklist" class="btn primary">Save checklist</button><span id="saveMessage" class="small muted"></span></div>
+      <div class="notice">A checklist date cannot be in the future. Operators can edit a past date only until 48 hours after that calendar day ends. After the freeze time, the record is read-only.</div>
+    </div>
+  </section>
+  <section id="setupView" class="hidden">
+    <h2 style="margin-top:0">Administrator checklist setup</h2>
+    <div class="notice">Define the daily safety parameters for each machine. Each machine starts with 10 sample checks. Edit these to match your approved machine-specific safety standard.</div>
+    <div class="panel">
+      <div class="toolbar"><div class="toolbar-left"><div class="field"><label for="setupMachine">Machine</label><select id="setupMachine"></select></div></div><button id="addParameter" class="btn primary">+ Add parameter</button></div>
+      <div class="small muted" style="margin:10px 0">Parameter name · instruction / acceptance criteria · response type</div>
+      <div id="parameterEditor"></div>
+      <div class="actions"><button id="saveParameters" class="btn primary">Save checklist parameters</button><span id="setupMessage" class="small muted"></span></div>
+    </div>
+  </section>
+  <section id="historyView" class="hidden">
+    <div class="toolbar"><div><h2 style="margin:0">Checklist records</h2><div class="muted small">Saved operator submissions by machine and date.</div></div><div class="toolbar-left"><div class="field"><label for="historyMachine">Machine</label><select id="historyMachine"><option value="">All machines</option></select></div></div></div>
+    <div class="panel table-wrap"><table class="table"><thead><tr><th>Date</th><th>Machine</th><th>Operator</th><th>Completed checks</th><th>Status</th><th>Freeze status</th></tr></thead><tbody id="historyRows"></tbody></table></div>
+  </section>
+  <div class="footer-note">Supabase URL/key fields and cloud password sign-in are scaffolded. Checklist data still uses browser storage until database tables, policies and sync functions are configured.</div>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(()=> {
+'use strict';
+const MACHINES=['Printing Machine 1','Printing Machine 2','Printing Machine 3','Extrusion Lamination','Slitting Machine 1','Slitting Machine 2'];
+const DEFAULTS=[
+ ['Emergency stop buttons','Accessible, labelled and functional','yesno'],
+ ['Machine guards and interlocks','All guards fitted; interlocks operate correctly','yesno'],
+ ['Safety doors and access covers','Closed and secured before operation','yesno'],
+ ['Electrical panels and cables','No exposed wires, damage or open panels','yesno'],
+ ['Fire and emergency equipment','Extinguisher/access clear; emergency route unobstructed','yesno'],
+ ['PPE compliance','Required PPE available and worn by assigned personnel','yesno'],
+ ['Rotating / nip-point hazards','Guarding in place; no unsafe access to moving parts','yesno'],
+ ['Housekeeping and floor condition','No oil, scrap, obstructions or slip/trip hazards','yesno'],
+ ['Warning signs and safety devices','Signs visible; alarms, beacons and safety devices functional','yesno'],
+ ['Abnormal noise, leakage or defect','No abnormal condition; report any defect before running','text']
+];
+const $=id=>document.getElementById(id);
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const read=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch{return f}};
+const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let current=null,activeTab='dashboard',supabaseClient=null;
+const SUPABASE_SETTINGS_KEY='machine_safety_supabase_settings';
+function loadSupabaseSettings(){
+ const cfg=read(SUPABASE_SETTINGS_KEY,{url:'',key:''});
+ $('supabaseUrl').value=cfg.url||'';$('supabaseKey').value=cfg.key||'';
+ if(cfg.url&&cfg.key) initSupabase(false);
+}
+function saveSupabaseSettings(){
+ const url=$('supabaseUrl').value.trim(),key=$('supabaseKey').value.trim();
+ if(!/^https:\/\/[a-zA-Z0-9.-]+$/.test(url)||!key){
+  $('supabaseConfigStatus').textContent='Enter a valid HTTPS project URL and anon/public key.';return;
+ }
+ write(SUPABASE_SETTINGS_KEY,{url,key});
+ const ok=initSupabase(true);
+ $('supabaseConfigStatus').textContent=ok?'Connection settings saved in this browser.':'Supabase client library could not be loaded.';
+}
+function initSupabase(showError){
+ const cfg=read(SUPABASE_SETTINGS_KEY,{url:'',key:''});
+ if(!cfg.url||!cfg.key||!window.supabase?.createClient){supabaseClient=null;return false;}
+ try{supabaseClient=window.supabase.createClient(cfg.url,cfg.key);return true;}
+ catch(e){supabaseClient=null;if(showError)$('supabaseConfigStatus').textContent='Could not initialise Supabase: '+e.message;return false;}
+}
+async function cloudLogin(){
+ const cfg=read(SUPABASE_SETTINGS_KEY,{url:'',key:''});
+ if(!cfg.url||!cfg.key){showLoginMessage('First save your Supabase project URL and anon/public key.');return;}
+ if(!supabaseClient&&!initSupabase(false)){showLoginMessage('Supabase client is unavailable. Check your internet connection and reload this page.');return;}
+ const email=$('cloudEmail').value.trim(),password=$('cloudPassword').value;
+ if(!email||!password){showLoginMessage('Enter your cloud account email and password.');return;}
+ $('cloudLoginBtn').disabled=true;$('cloudLoginBtn').textContent='Signing in…';
+ try{
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+  if(error)throw error;
+  const role=data.user?.app_metadata?.role==='admin'?'admin':'operator';
+  current={role,user:data.user.email||email,auth:'supabase',id:data.user.id};
+  enterApp();
+ }catch(e){showLoginMessage('Cloud sign-in failed: '+e.message);}
+ finally{$('cloudLoginBtn').disabled=false;$('cloudLoginBtn').textContent='Sign in with Supabase';}
+}
+function showLoginMessage(message){$('loginMessage').textContent=message;$('loginMessage').classList.remove('hidden');}
+function enterApp(){
+ $('loginScreen').classList.add('hidden');$('mainScreen').classList.remove('hidden');$('logoutBtn').classList.remove('hidden');
+ $('userLabel').textContent=`${current.user} · ${current.role==='admin'?'Administrator':'Operator'}${current.auth==='supabase'?' · Cloud':''}`;
+ document.querySelectorAll('.admin-only').forEach(x=>x.classList.toggle('hidden',current.role!=='admin'));
+ if(current.role!=='admin'&&activeTab==='setup')setTab('dashboard');setTab('dashboard');
+}
+let configs=read('safety_configs',Object.fromEntries(MACHINES.map(m=>[m,DEFAULTS.map((x,i)=>({id:`p${i+1}`,name:x[0],instruction:x[1],type:x[2],required:true}))])));
+let records=read('safety_records',{});
+function recordKey(m,d){return `${d}__${m}`}
+function freezeAt(date){const [y,mo,da]=date.split('-').map(Number);return new Date(y,mo-1,da+2,23,59,59,999)}
+function isFrozen(date){return Date.now()>freezeAt(date).getTime()}
+function isFuture(date){return date>today()}
+function completeCount(machine,date){const cfg=configs[machine]||[];const rec=records[recordKey(machine,date)];if(!rec)return 0;return cfg.filter(p=>{const v=rec.values?.[p.id];return p.type==='yesno'?v===true:(v!==undefined&&String(v).trim()!=='')}).length}
+function isComplete(machine,date){const cfg=configs[machine]||[];return cfg.length>0&&completeCount(machine,date)===cfg.length}
+function setTab(tab){activeTab=tab;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));['dashboard','checklist','setup','history'].forEach(t=>$(t+'View').classList.toggle('hidden',t!==tab));if(tab==='dashboard')renderDashboard();if(tab==='checklist')renderChecklist();if(tab==='setup')renderSetup();if(tab==='history')renderHistory()}
+function login(){const role=$('role').value,u=$('username').value.trim(),p=$('password').value;const ok=role==='admin'?(u==='admin'&&p==='admin123'):(u==='operator'&&p==='operator123');if(!ok){showLoginMessage('Invalid prototype credentials.');return}current={role,user:u,auth:'local'};enterApp()}
+async function logout(){if(current?.auth==='supabase'&&supabaseClient){try{await supabaseClient.auth.signOut()}catch(e){console.warn('Supabase sign-out:',e)}}current=null;$('mainScreen').classList.add('hidden');$('loginScreen').classList.remove('hidden');$('logoutBtn').classList.add('hidden');$('userLabel').textContent='';$('password').value='';$('cloudPassword').value=''}
+function fillMachineSelects(){['machineSelect','setupMachine'].forEach(id=>$(id).innerHTML=MACHINES.map(m=>`<option>${esc(m)}</option>`).join(''));$('historyMachine').innerHTML='<option value="">All machines</option>'+MACHINES.map(m=>`<option>${esc(m)}</option>`).join('')}
+function renderDashboard(){const date=$('dashboardDate').value||today();let done=0,pending=0,total=0;const cards=MACHINES.map(m=>{const n=(configs[m]||[]).length,c=completeCount(m,date),ok=isComplete(m,date);total+=n;if(ok)done++;else pending++;const rec=records[recordKey(m,date)];return `<article class="machine"><div class="machine-top"><h3>${esc(m)}</h3><span class="status ${ok?'green':'red'}">${ok?'COMPLETE':'PENDING'}</span></div><p>${c} of ${n} parameters completed ${rec?`· by ${esc(rec.operator)}`:'· No saved record yet'}</p><div class="progress"><span style="width:${n?Math.round(c/n*100):0}%"></span></div><div class="inline" style="justify-content:space-between;margin-top:12px"><span class="small muted">${date}</span><button class="btn" data-open-machine="${esc(m)}">View checklist</button></div></article>`}).join('');$('completeCount').textContent=`${done} / 6`;$('pendingCount').textContent=pending;$('totalChecks').textContent=total;$('machineCards').innerHTML=cards;document.querySelectorAll('[data-open-machine]').forEach(b=>b.onclick=()=>{$('machineSelect').value=b.dataset.openMachine;$('checkDate').value=date;setTab('checklist')})}
+function renderChecklist(){const m=$('machineSelect').value||MACHINES[0],date=$('checkDate').value||today();$('checkDate').max=today();const future=isFuture(date),frozen=isFrozen(date),cfg=configs[m]||[],rec=records[recordKey(m,date)]||{values:{}};const locked=future||frozen;let state=future?'Future dates are not allowed.':frozen?'This checklist is frozen (more than 48 hours after the checklist day).':`Editable until ${freezeAt(date).toLocaleString()}`;$('dateState').textContent=state;$('dateState').style.color=locked?'var(--red)':'var(--green)';$('checklistRows').innerHTML=cfg.length?cfg.map((p,i)=>{const v=rec.values?.[p.id];let input='';if(p.type==='yesno')input=`<div class="yesno"><input type="checkbox" data-param="${esc(p.id)}" ${v===true?'checked':''} ${locked?'disabled':''}><span class="tag">Tick when safe / compliant</span></div>`;else if(p.type==='number')input=`<input type="number" step="any" data-param="${esc(p.id)}" value="${esc(v??'')}" placeholder="Enter measured value" ${locked?'disabled':''}>`;else input=`<input type="text" data-param="${esc(p.id)}" value="${esc(v??'')}" placeholder="Enter observation / value" ${locked?'disabled':''}>`;return `<div class="check-row"><div><div class="check-name">${i+1}. ${esc(p.name)}</div><div class="check-desc">${esc(p.instruction||'')}</div></div><div>${input}</div><div class="tag">${p.type==='yesno'?'Yes / No confirmation':p.type==='number'?'Numeric value':'Text / observation'}${p.required?' · Required':' · Optional'}</div></div>`}).join(''):'<div class="empty">No checklist parameters configured for this machine.</div>';$('saveChecklist').disabled=locked||current.role!=='operator';$('saveChecklist').textContent=locked?'Read only':'Save checklist';$('saveMessage').textContent=locked?'':`Signed in as ${current.user}`;if(current.role==='admin')$('saveChecklist').disabled=true}
+function saveChecklist(){const m=$('machineSelect').value,date=$('checkDate').value;if(!date||isFuture(date)||isFrozen(date)){alert('This date cannot be edited.');return}const values={};document.querySelectorAll('[data-param]').forEach(el=>{values[el.dataset.param]=el.type==='checkbox'?el.checked:el.value.trim()});const cfg=configs[m]||[];const missing=cfg.filter(p=>p.required&&(p.type==='yesno'?values[p.id]!==true:!String(values[p.id]??'').trim()));if(missing.length){$('saveMessage').textContent=`Please complete ${missing.length} outstanding required parameter(s).`;return}records[recordKey(m,date)]={machine:m,date,operator:current.user,values,savedAt:new Date().toISOString()};write('safety_records',records);$('saveMessage').textContent='Checklist saved successfully.';renderChecklist();renderDashboard()}
+function renderSetup(){const m=$('setupMachine').value||MACHINES[0];const cfg=configs[m]||[];$('parameterEditor').innerHTML=cfg.map((p,i)=>`<div class="param-row" data-param-row="${esc(p.id)}"><input data-config="name" value="${esc(p.name)}" aria-label="Parameter name" placeholder="Parameter name"><input data-config="instruction" value="${esc(p.instruction)}" aria-label="Instruction" placeholder="Instruction / acceptance criteria"><select data-config="type"><option value="yesno" ${p.type==='yesno'?'selected':''}>Tick / Yes-No</option><option value="number" ${p.type==='number'?'selected':''}>Numeric value</option><option value="text" ${p.type==='text'?'selected':''}>Text / observation</option></select><button class="btn danger" data-remove-param="${esc(p.id)}" title="Remove parameter">Remove</button></div>`).join('');document.querySelectorAll('[data-remove-param]').forEach(b=>b.onclick=()=>{configs[m]=configs[m].filter(p=>p.id!==b.dataset.removeParam);renderSetup()})}
+function saveParameters(){const m=$('setupMachine').value;const rows=[...document.querySelectorAll('[data-param-row]')];const cfg=rows.map(r=>({id:r.dataset.paramRow,name:r.querySelector('[data-config=name]').value.trim(),instruction:r.querySelector('[data-config=instruction]').value.trim(),type:r.querySelector('[data-config=type]').value,required:true}));if(cfg.some(p=>!p.name)){alert('Every parameter must have a name.');return}configs[m]=cfg;write('safety_configs',configs);$('setupMessage').textContent='Parameters saved.';renderDashboard()}
+function renderHistory(){const filter=$('historyMachine').value;const rows=Object.values(records).filter(r=>!filter||r.machine===filter).sort((a,b)=>b.date.localeCompare(a.date));$('historyRows').innerHTML=rows.length?rows.map(r=>{const n=(configs[r.machine]||[]).length,c=completeCount(r.machine,r.date),ok=isComplete(r.machine,r.date),frozen=isFrozen(r.date);return `<tr><td>${esc(r.date)}</td><td>${esc(r.machine)}</td><td>${esc(r.operator)}</td><td>${c} / ${n}</td><td><span class="status ${ok?'green':'red'}">${ok?'COMPLETE':'INCOMPLETE'}</span></td><td>${frozen?'Frozen':'Editable window'}</td></tr>`}).join(''):'<tr><td colspan="6" class="empty">No saved records yet.</td></tr>'}
+$('loginBtn').onclick=login;$('logoutBtn').onclick=logout;
+$('saveSupabase').onclick=saveSupabaseSettings;$('cloudLoginBtn').onclick=cloudLogin;
+$('cloudPassword').addEventListener('keydown',e=>{if(e.key==='Enter')cloudLogin()});
+$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});loadSupabaseSettings();$('navTabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b&&(!b.classList.contains('admin-only')||current.role==='admin'))setTab(b.dataset.tab)});
+$('dashboardDate').value=today();$('dashboardDate').max=today();$('checkDate').value=today();fillMachineSelects();$('machineSelect').onchange=renderChecklist;$('checkDate').onchange=renderChecklist;$('dashboardDate').onchange=renderDashboard;$('refreshDashboard').onclick=renderDashboard;$('saveChecklist').onclick=saveChecklist;$('setupMachine').onchange=renderSetup;$('addParameter').onclick=()=>{const m=$('setupMachine').value;configs[m]=configs[m]||[];configs[m].push({id:'p'+Date.now(),name:'',instruction:'',type:'yesno',required:true});renderSetup()};$('saveParameters').onclick=saveParameters;$('historyMachine').onchange=renderHistory;
+})();
+</script>
+</body></html>
